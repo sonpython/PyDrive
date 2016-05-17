@@ -314,3 +314,8 @@ class GoogleDriveFile(ApiAttributeMixin, ApiResource):
     if resp.status != 200:
       raise ApiRequestError('Cannot download file: %s' % resp)
     return content
+  def DeleteFile(self,file_id):
+    try:
+      self.auth.service.files().delete(fileId=file_id).execute()
+    except errors.HttpError, error:
+      print 'An error occurred: %s' % error
